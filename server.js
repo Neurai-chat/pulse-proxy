@@ -11,10 +11,13 @@ app.post("/chat", async (req, res) => {
   ...req.body,
   stream: false
   };
-  const groqRes = await fetch("https://pulse-proxy-3n26.onrender.com/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+const completion = await client.chat.completions.create({
+  model: "llama-3.1-8b-instant",
+  messages: req.body.messages
+});
+
+res.json(completion);
+
     
     },
     body: JSON.stringify(body)
