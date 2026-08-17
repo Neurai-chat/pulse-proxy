@@ -6,25 +6,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/chat", async (req, res) => {
- const body = {
-  ...req.body,
-  stream: false
-  };
-const completion = await client.chat.completions.create({
-  model: "llama-3.1-8b-instant",
-  messages: req.body.messages
+const client = new Groq({
+  apiKey: process.env.GROQ_API_KEY
 });
 
-res.json(completion);
+app.post("/chat", async (req, res) => {
+  try {
+    const completion = await client.chat.completions.create({
+      model: "llama-3.1-8b-instant",
+      messages: req.body.messages,
+      stream: false
+    });
 
-    
-    },
-    body: JSON.stringify(body)
-  });
-  const data = await groqRes.json();
-  res.json(data);
+    res.json(completion);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(3000);
-
