@@ -1,5 +1,5 @@
 import express from "express";
-import fetch from "node-fetch";
+import Groq from "groq-sdk";
 import cors from "cors";
 
 const app = express();
