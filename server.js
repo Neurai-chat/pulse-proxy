@@ -11,7 +11,7 @@ app.post("/chat", async (req, res) => {
   ...req.body,
   stream: false
   };
-  const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const groqRes = await fetch("https://pulse-proxy-3n26.onrender.com/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
