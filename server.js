@@ -13,7 +13,7 @@ const client = new Groq({
 app.post("/chat", async (req, res) => {
   try {
     const completion = await client.chat.completions.create({
-      model: "llama-3.1-8b-instant",
+      model: "gpt-oss-20b",
       messages: req.body.messages,
       stream: false
     });
